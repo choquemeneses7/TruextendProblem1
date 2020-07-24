@@ -32,7 +32,7 @@ public class ClassService {
         classesList.removeIf(itemClass -> itemClass.getCode() == classCode);
     }
 
-    public Class updateStudent(int classCode, Class newClass) {
+    public Class updateClass(int classCode, Class newClass) {
         Optional<Class> studentFind = classesList.stream().filter(itemClass -> classCode == itemClass.getCode()).findFirst();
         if (studentFind.isPresent()){
             studentFind.map(itemClass -> classesList.set(classesList.indexOf(itemClass), newClass));
