@@ -44,7 +44,7 @@ public class ClassService {
 
     public void deleteClass(int classCode) throws ResourceNotFoundException {
         if(!classesList.removeIf(itemClass -> itemClass.getCode() == classCode)){
-            throw new ResourceNotFoundException("Class: "+classCode);
+            throw new ResourceNotFoundException("Class: "+classCode+ " not exists");
         }
     }
 
@@ -54,7 +54,7 @@ public class ClassService {
             studentFind.map(itemClass -> classesList.set(classesList.indexOf(itemClass), newClass));
             return newClass;
         } else {
-            throw new ResourceNotFoundException("Class: "+classCode);
+            throw new ResourceNotFoundException("Class: "+classCode+ " not exists");
         }
     }
 }

@@ -27,13 +27,13 @@ public class ClassStudentDetailController {
         return classStudentDetailService.getClassStudentDetails();
     }
 
-    @GetMapping("/studentClasses/{id}")
-    public List<Class> getStudentClasses(@PathVariable(value = "id") int studentId){
+    @GetMapping("/studentClasses/{studentId}")
+    public List<Class> getStudentClasses(@PathVariable(value = "studentId") int studentId){
         return classService.getByClassCode(classStudentDetailService.getByStudentId(studentId));
     }
 
-    @GetMapping("/studentsOfClass/{id}")
-    public List<Student> getStudentsOfClass(@PathVariable(value = "id") int classCode){
+    @GetMapping("/studentsOfClass/{classCode}")
+    public List<Student> getStudentsOfClass(@PathVariable(value = "classCode") int classCode){
         return studentService.getByStudentId(classStudentDetailService.getByClassCode(classCode));
     }
 

@@ -1,4 +1,4 @@
-package com.tx.TruextendProblem1.exceptions;
+package com.tx.TruextendProblem1.exceptions.models;
 
 import java.util.Date;
 

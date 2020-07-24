@@ -50,6 +50,6 @@ public class StudentService {
             studentFind.map(itemStudent -> studentList.set(studentList.indexOf(itemStudent), student));
             return student;
         } else
-            throw new ResourceNotFoundException("Student Id: "+studentId);
+            throw new ResourceNotFoundException("Student Id: "+studentId+ " not exists");
     }
 }
