@@ -1,16 +1,19 @@
 package com.tx.TruextendProblem1.services;
 
 import com.tx.TruextendProblem1.entities.Student;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.OptionalInt;
-import java.util.stream.IntStream;
+import java.util.*;
 
+@Service
 public class StudentService {
 
-    private List<Student> studentList= new ArrayList<Student>();
+    private List<Student> studentList= new ArrayList<Student>(Arrays.asList(
+            new Student(36051,"Veimar","Choque"),
+            new Student(36052,"Leo","Daza"),
+            new Student(36053,"Ruben","Dario"),
+            new Student(36054,"Mario","Grunt"),
+            new Student(36055,"Rodrigo","Rodriguez")));
 
     public List<Student> getStudents() {
         return studentList;
@@ -26,9 +29,11 @@ public class StudentService {
     }
 
     public Student updateStudent(int studentId, Student student) {
-        Optional<Student> studentIndex = studentList.stream().filter(item -> item.getStudentId() == studentId).findFirst();
-        int x = studentList.indexOf(studentIndex);
-        studentList.set(x, student);
-        return student;
+        Optional<Student> studentFinded = studentList.stream().filter(item -> studentId == item.getStudentId()).findFirst();
+        if (studentFinded.isPresent()){
+            studentFinded.map(stu -> studentList.set(studentList.indexOf(stu), student));
+            return student;
+        }
+        return null;
     }
 }

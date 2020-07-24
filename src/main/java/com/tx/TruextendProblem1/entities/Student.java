@@ -3,13 +3,13 @@ package com.tx.TruextendProblem1.entities;
 public class Student {
 
     private int studentId;
-    private String lastName;
     private String firstName;
+    private String lastName;
 
-    public Student(int studentId, String lastName, String firstName) {
+    public Student(int studentId, String firstName, String lastName) {
         this.studentId = studentId;
-        this.lastName = lastName;
         this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public Student() {
