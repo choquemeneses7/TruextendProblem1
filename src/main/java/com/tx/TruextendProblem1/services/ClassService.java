@@ -1,6 +1,7 @@
 package com.tx.TruextendProblem1.services;
 
 import com.tx.TruextendProblem1.entities.Class;
+import com.tx.TruextendProblem1.entities.ClassStudentDetail;
 import com.tx.TruextendProblem1.entities.Student;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,14 @@ public class ClassService {
 
     public List<Class> getClasses() {
         return classesList;
+    }
+
+    public List<Class> getByClassCode(List<ClassStudentDetail> details) {
+        List<Class> response = new ArrayList<Class>();
+        details.stream().forEach(classStudentDetail -> response.add(classesList.stream()
+                .filter(itemClass -> itemClass.getCode() == classStudentDetail.getCode())
+                .findFirst().get()));
+        return response;
     }
 
     public Class createClass(Class newClass){
