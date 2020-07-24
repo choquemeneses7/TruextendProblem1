@@ -29,9 +29,9 @@ public class StudentService {
     }
 
     public Student updateStudent(int studentId, Student student) {
-        Optional<Student> studentFind = studentList.stream().filter(item -> studentId == item.getStudentId()).findFirst();
+        Optional<Student> studentFind = studentList.stream().filter(itemStudent -> studentId == itemStudent.getStudentId()).findFirst();
         if (studentFind.isPresent()){
-            studentFind.map(student1 -> studentList.set(studentList.indexOf(student1), student));
+            studentFind.map(itemStudent -> studentList.set(studentList.indexOf(itemStudent), student));
             return student;
         }
         return null;
