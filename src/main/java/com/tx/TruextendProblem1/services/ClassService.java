@@ -3,6 +3,8 @@ package com.tx.TruextendProblem1.services;
 import com.tx.TruextendProblem1.entities.Class;
 import com.tx.TruextendProblem1.entities.ClassStudentDetail;
 import com.tx.TruextendProblem1.entities.Student;
+import com.tx.TruextendProblem1.exceptions.DuplicatedKeyException;
+import com.tx.TruextendProblem1.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,21 +34,27 @@ public class ClassService {
         return response;
     }
 
-    public Class createClass(Class newClass){
+    public Class createClass(Class newClass) throws DuplicatedKeyException {
+        if(classesList.stream().anyMatch(cls-> cls.getCode()==newClass.getCode())){
+            throw new DuplicatedKeyException("Class: "+newClass.getCode());
+        }
         classesList.add(newClass);
         return newClass;
     }
 
-    public void deleteClass(int classCode){
-        classesList.removeIf(itemClass -> itemClass.getCode() == classCode);
+    public void deleteClass(int classCode) throws ResourceNotFoundException {
+        if(!classesList.removeIf(itemClass -> itemClass.getCode() == classCode)){
+            throw new ResourceNotFoundException("Class: "+classCode);
+        }
     }
 
-    public Class updateClass(int classCode, Class newClass) {
+    public Class updateClass(int classCode, Class newClass) throws ResourceNotFoundException {
         Optional<Class> studentFind = classesList.stream().filter(itemClass -> classCode == itemClass.getCode()).findFirst();
         if (studentFind.isPresent()){
             studentFind.map(itemClass -> classesList.set(classesList.indexOf(itemClass), newClass));
             return newClass;
+        } else {
+            throw new ResourceNotFoundException("Class: "+classCode);
         }
-        return null;
     }
 }

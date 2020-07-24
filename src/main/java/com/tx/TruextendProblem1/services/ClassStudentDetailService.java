@@ -2,6 +2,7 @@ package com.tx.TruextendProblem1.services;
 
 import com.tx.TruextendProblem1.entities.Class;
 import com.tx.TruextendProblem1.entities.ClassStudentDetail;
+import com.tx.TruextendProblem1.exceptions.DuplicatedKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,6 +35,9 @@ public class ClassStudentDetailService {
     }
 
     public ClassStudentDetail createClassStudentDetail(ClassStudentDetail classStudent){
+        if(classStudentList.stream().anyMatch(clas-> clas.getCode()==classStudent.getCode() && clas.getStudentId() == classStudent.getStudentId())){
+            throw new DuplicatedKeyException("Class Code : "+classStudent.getCode()+", Student Id: "+classStudent.getStudentId());
+        }
         classStudentList.add(classStudent);
         return classStudent;
     }
