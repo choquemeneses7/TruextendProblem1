@@ -22,6 +22,10 @@ Immediately the program will start to download the dependencies and compile, onc
   <img src="https://i.imgur.com/f1j8z0S.png" class="center" alt="Haversine Formula"/>
 </p>
 
+Also The Application have 20 unit tests with different cases and situations for the controllers (negative and positive testings). To execute the test cases execute this command:
+
+`` mvn test ``
+
 The project is deployed on port 8080 by default, however this configuration can be easily changed by modifying the ``Application.properties`` file in which you must change the port for the port on which you want to run the application.
 
 - server.port=8080    (change the 8080 to the port where you want to run the app)
