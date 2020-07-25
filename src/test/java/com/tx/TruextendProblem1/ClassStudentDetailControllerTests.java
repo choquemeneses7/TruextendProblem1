@@ -2,9 +2,7 @@ package com.tx.TruextendProblem1;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tx.TruextendProblem1.controllers.ClassStudentDetailController;
-import com.tx.TruextendProblem1.controllers.StudentController;
 import com.tx.TruextendProblem1.entities.ClassStudentDetail;
-import com.tx.TruextendProblem1.entities.Student;
 import com.tx.TruextendProblem1.services.ClassService;
 import com.tx.TruextendProblem1.services.ClassStudentDetailService;
 import com.tx.TruextendProblem1.services.StudentService;

@@ -1,9 +1,7 @@
 package com.tx.TruextendProblem1.controllers;
 
 import com.tx.TruextendProblem1.entities.Class;
-import com.tx.TruextendProblem1.entities.Student;
 import com.tx.TruextendProblem1.services.ClassService;
-import com.tx.TruextendProblem1.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

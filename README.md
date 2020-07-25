@@ -18,9 +18,17 @@ After install the prerequired tools, the project could be run to test it with th
 
 Immediately the program will start to download the dependencies and compile, once finished compiling you can access the Swagger to verify the operation of each one of the Endpoints created to satisfy the requirements of the project.
 
+<p align="center">
+  <img src="https://i.imgur.com/f1j8z0S.png" class="center" alt="Haversine Formula"/>
+</p>
+
 The project is deployed on port 8080 by default, however this configuration can be easily changed by modifying the ``Application.properties`` file in which you must change the port for the port on which you want to run the application.
 
 - server.port=8080    (change the 8080 to the port where you want to run the app)
 
 Finally you can access the Swagger in the following link (if you changed the port you must also change the url port to see the swagger):
 - http://localhost:8080/swagger-ui.html#
+
+<p align="center">
+  <img src="https://i.imgur.com/YQlOm1z.png" class="center" alt="Haversine Formula"/>
+</p>

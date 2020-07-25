@@ -1,11 +1,8 @@
 package com.tx.TruextendProblem1;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tx.TruextendProblem1.controllers.ClassController;
 import com.tx.TruextendProblem1.controllers.StudentController;
-import com.tx.TruextendProblem1.entities.Class;
 import com.tx.TruextendProblem1.entities.Student;
-import com.tx.TruextendProblem1.services.ClassService;
 import com.tx.TruextendProblem1.services.StudentService;
 import org.hamcrest.core.Is;
 import org.junit.Test;

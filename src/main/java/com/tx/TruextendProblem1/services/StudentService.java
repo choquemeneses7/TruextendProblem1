@@ -1,6 +1,5 @@
 package com.tx.TruextendProblem1.services;
 
-import com.tx.TruextendProblem1.entities.Class;
 import com.tx.TruextendProblem1.entities.ClassStudentDetail;
 import com.tx.TruextendProblem1.entities.Student;
 import com.tx.TruextendProblem1.exceptions.DuplicatedKeyException;
