@@ -42,8 +42,12 @@ public class CourseService {
     }
 
     public List<Student> getStudentsOfCourse(int courseCode) {
-        Course courseFound = coursesList.stream().filter(course -> course.getCode() == courseCode).findFirst().get();
-        return courseFound.getStudents();
+        Optional<Course> courseFound = coursesList.stream().filter(course -> course.getCode() == courseCode).findFirst();
+        List<Student> response = new ArrayList<Student>();
+        if (courseFound.isPresent()){
+            courseFound.map(course -> response.addAll(course.getStudents()));
+        }
+        return response;
     }
 
     public Course createCourse(Course newCourse) throws DuplicatedKeyException {

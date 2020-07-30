@@ -39,12 +39,15 @@ public class StudentService {
     }
 
     public List<Course> getCoursesOfStudent(int studentId) {
-        Student studentFound = studentList.stream().filter(student -> student.getStudentId() == studentId).findFirst().get();
-        return studentFound.getCourses();
+        Optional<Student> studentFound = studentList.stream().filter(student -> student.getStudentId() == studentId).findFirst();
+        List<Course> response = new ArrayList<Course>();
+        if (studentFound.isPresent()){
+            studentFound.map(student -> response.addAll(student.getCourses()));
+        }
+        return response;
     }
 
     public Student createStudent(Student student) throws DuplicatedKeyException  {
-        System.out.println("LOLER"+student.toString());
         if(studentList.stream().anyMatch(std-> std.getStudentId()==student.getStudentId()))
             throw new DuplicatedKeyException("student Id: "+student.getStudentId());
         studentList.add(student);
