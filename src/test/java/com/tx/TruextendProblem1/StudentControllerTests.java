@@ -98,4 +98,38 @@ public class StudentControllerTests {
                 .andExpect(MockMvcResultMatchers.status().is(404));
 
     }
+
+    @Test
+    public void getClassesOfStudentSuccessfully() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/api/students/courses/36051")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
+    }
+
+    @Test
+    public void getClassesOfInvalidStudent() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/api/students/courses/666")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$").isEmpty());
+    }
+
+    @Test
+    public void getStudentByCodeSuccessfully() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/api/students/36051")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.studentId", Is.is(36051)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName", Is.is("Veimar")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName", Is.is("Choque")));
+    }
+
+    @Test
+    public void getStudentByCodeInvalid() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/api/students/666")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(500));
+    }
 }

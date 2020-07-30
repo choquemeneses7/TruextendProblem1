@@ -3,7 +3,6 @@ package com.tx.TruextendProblem1.controllers;
 import com.tx.TruextendProblem1.entities.Course;
 import com.tx.TruextendProblem1.entities.Student;
 import com.tx.TruextendProblem1.services.CourseService;
-import com.tx.TruextendProblem1.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,13 +35,13 @@ public class CourseController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteStudent(@PathVariable(value = "id") int classCode) {
-        courseService.deleteCourse(classCode);
+    public void deleteStudent(@PathVariable(value = "id") int courseCode) {
+        courseService.deleteCourse(courseCode);
     }
 
     @PutMapping("/{id}")
-    public Course updateStudent(@PathVariable(value = "id") int classCode, @RequestBody Course newCourse) {
-        return courseService.updateCourse(classCode, newCourse);
+    public Course updateStudent(@PathVariable(value = "id") int courseCode, @RequestBody Course newCourse) {
+        return courseService.updateCourse(courseCode, newCourse);
     }
 
 }
