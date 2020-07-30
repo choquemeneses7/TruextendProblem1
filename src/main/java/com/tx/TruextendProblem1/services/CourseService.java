@@ -51,7 +51,7 @@ public class CourseService {
     }
 
     public Course createCourse(Course newCourse) throws DuplicatedKeyException {
-        if(coursesList.stream().anyMatch(cls-> cls.getCode()== newCourse.getCode())){
+        if(coursesList.stream().anyMatch(course-> course.getCode()== newCourse.getCode())){
             throw new DuplicatedKeyException("Class: "+ newCourse.getCode());
         }
         coursesList.add(newCourse);

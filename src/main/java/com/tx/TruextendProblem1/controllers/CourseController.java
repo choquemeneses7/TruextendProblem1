@@ -22,12 +22,12 @@ public class CourseController {
     private StudentService studentService;
 
     @GetMapping("")
-    public List<Course> getAllClasses(){
+    public List<Course> getAllCourses(){
         return courseService.getCourses();
     }
 
     @GetMapping("/students/{courseCode}")
-    public List<Student> getClassesOfStudent(@PathVariable(value = "courseCode") int courseCode){
+    public List<Student> getCoursesOfStudent(@PathVariable(value = "courseCode") int courseCode){
         return courseService.getStudentsOfCourse(courseCode);
     }
     @PostMapping("")

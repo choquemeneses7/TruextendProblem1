@@ -20,10 +20,10 @@ public class Student {
 
     @ManyToMany(targetEntity = Course.class, cascade = {CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH} )
     @JoinTable(
-            name="student_role",
+            name="student_course",
             joinColumns=
-            @JoinColumn( name="user_id", referencedColumnName="studentId"),
-            inverseJoinColumns=@JoinColumn(name="role_id", referencedColumnName="code"))
+            @JoinColumn( name="studentId", referencedColumnName="studentId"),
+            inverseJoinColumns=@JoinColumn(name="courseCode", referencedColumnName="code"))
     private List<Course> courses;
 
     public Student(int studentId, String firstName, String lastName) {
