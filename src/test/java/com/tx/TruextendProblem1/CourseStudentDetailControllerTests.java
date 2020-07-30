@@ -2,9 +2,9 @@ package com.tx.TruextendProblem1;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tx.TruextendProblem1.controllers.ClassStudentDetailController;
-import com.tx.TruextendProblem1.entities.ClassStudentDetail;
-import com.tx.TruextendProblem1.services.ClassService;
-import com.tx.TruextendProblem1.services.ClassStudentDetailService;
+import com.tx.TruextendProblem1.entities.CourseStudentDetail;
+import com.tx.TruextendProblem1.services.CourseService;
+import com.tx.TruextendProblem1.services.CourseStudentDetailService;
 import com.tx.TruextendProblem1.services.StudentService;
 import org.hamcrest.core.Is;
 import org.junit.Test;
@@ -20,8 +20,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(ClassStudentDetailController.class)
-@Import({ClassStudentDetailService.class, ClassStudentDetail.class, ClassService.class, StudentService.class})
-public class ClassStudentDetailControllerTests {
+@Import({CourseStudentDetailService.class, CourseStudentDetail.class, CourseService.class, StudentService.class})
+public class CourseStudentDetailControllerTests {
 
     @Autowired
     private MockMvc mvc;
@@ -87,9 +87,9 @@ public class ClassStudentDetailControllerTests {
 
     @Test
     public void addClassStudentDetailSuccessfully()throws Exception {
-        ClassStudentDetail newClassStudentDetail = new ClassStudentDetail(36052,1);
+        CourseStudentDetail newCourseStudentDetail = new CourseStudentDetail(36052,1);
         mvc.perform(MockMvcRequestBuilders.post("/api/classStudentDetails")
-                .content(mapper.writeValueAsString(newClassStudentDetail))
+                .content(mapper.writeValueAsString(newCourseStudentDetail))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.studentId", Is.is(36052)));

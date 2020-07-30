@@ -1,16 +1,16 @@
 package com.tx.TruextendProblem1.entities;
 
-public class ClassStudentDetail {
+public class CourseStudentDetail {
 
     private int studentId;
     private int code;
 
-    public ClassStudentDetail(int studentId, int code) {
+    public CourseStudentDetail(int studentId, int code) {
         this.studentId = studentId;
         this.code = code;
     }
 
-    public ClassStudentDetail() {
+    public CourseStudentDetail() {
     }
 
     public int getStudentId() {

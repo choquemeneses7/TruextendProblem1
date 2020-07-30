@@ -1,7 +1,6 @@
 package com.tx.TruextendProblem1.services;
 
-import com.tx.TruextendProblem1.entities.Class;
-import com.tx.TruextendProblem1.entities.ClassStudentDetail;
+import com.tx.TruextendProblem1.entities.CourseStudentDetail;
 import com.tx.TruextendProblem1.exceptions.DuplicatedKeyException;
 import org.springframework.stereotype.Service;
 
@@ -11,29 +10,29 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ClassStudentDetailService {
+public class CourseStudentDetailService {
 
-    private List<ClassStudentDetail> classStudentList= new ArrayList<ClassStudentDetail>(Arrays.asList(
-            new ClassStudentDetail(36051, 1),
-            new ClassStudentDetail(36052, 2),
-            new ClassStudentDetail(36053, 3),
-            new ClassStudentDetail(36051, 2),
-            new ClassStudentDetail(36051, 3)
+    private List<CourseStudentDetail> classStudentList= new ArrayList<CourseStudentDetail>(Arrays.asList(
+            new CourseStudentDetail(36051, 1),
+            new CourseStudentDetail(36052, 2),
+            new CourseStudentDetail(36053, 3),
+            new CourseStudentDetail(36051, 2),
+            new CourseStudentDetail(36051, 3)
     ));
 
-    public List<ClassStudentDetail> getClassStudentDetails() {
+    public List<CourseStudentDetail> getClassStudentDetails() {
         return classStudentList;
     }
 
-    public List<ClassStudentDetail> getByStudentId(int studentId) {
+    public List<CourseStudentDetail> getByStudentId(int studentId) {
         return classStudentList.stream().filter(classStudent -> classStudent.getStudentId() == studentId).collect(Collectors.toList());
     }
 
-    public List<ClassStudentDetail> getByClassCode(int classCode) {
+    public List<CourseStudentDetail> getByClassCode(int classCode) {
         return classStudentList.stream().filter(classStudent -> classStudent.getCode() == classCode).collect(Collectors.toList());
     }
 
-    public ClassStudentDetail createClassStudentDetail(ClassStudentDetail classStudent){
+    public CourseStudentDetail createClassStudentDetail(CourseStudentDetail classStudent){
         if(classStudentList.stream().anyMatch(clas-> clas.getCode()==classStudent.getCode() && clas.getStudentId() == classStudent.getStudentId())){
             throw new DuplicatedKeyException("Class Code : "+classStudent.getCode()+", Student Id: "+classStudent.getStudentId());
         }
