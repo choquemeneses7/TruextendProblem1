@@ -50,6 +50,16 @@ public class StudentService {
         return student;
     }
 
+    public List<Course> addCoursesToStudent(int studentId, List<Course> courses) throws ResourceNotFoundException {
+        Optional<Student> studentFound = getStudentById(studentId);
+        if (studentFound.isPresent()){
+            studentFound.map(student -> student.getCourses().addAll(courses));
+            return courses;
+        } else {
+            throw new ResourceNotFoundException("Student: "+studentId+ " not exists");
+        }
+    }
+
     public void deleteStudent(int studentId) throws ResourceNotFoundException {
         if(!studentList.removeIf(student -> student.getStudentId()== studentId)){
             throw new ResourceNotFoundException("Student Id: "+studentId+ " not exists");

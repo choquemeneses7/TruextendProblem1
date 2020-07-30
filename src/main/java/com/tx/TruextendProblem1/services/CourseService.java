@@ -47,6 +47,16 @@ public class CourseService {
         return newCourse;
     }
 
+    public List<Student> addStudentsToCourse(int courseCode, List<Student> students) throws ResourceNotFoundException {
+        Optional<Course> courseFound = getCourseByCode(courseCode);
+        if (courseFound.isPresent()){
+            courseFound.map(course -> course.getStudents().addAll(students));
+            return students;
+        } else {
+            throw new ResourceNotFoundException("Class: "+courseCode+ " not exists");
+        }
+    }
+
     public void deleteCourse(int courseCode) throws ResourceNotFoundException {
         if(!coursesList.removeIf(course -> course.getCode() == courseCode)){
             throw new ResourceNotFoundException("Class: "+courseCode+ " not exists");

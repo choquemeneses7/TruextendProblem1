@@ -35,13 +35,18 @@ public class CourseController {
         return courseService.createCourse(newCourse);
     }
 
-    @DeleteMapping("/{id}")
+    @PostMapping("/{courseCode}")
+    public List<Student> addStudentsToCourse(@PathVariable(value = "courseCode") int courseCode, @RequestBody List<Student> students) {
+        return courseService.addStudentsToCourse(courseCode,students);
+    }
+
+    @DeleteMapping("/{courseCode}")
     public void deleteStudent(@PathVariable(value = "id") int courseCode) {
         courseService.deleteCourse(courseCode);
     }
 
-    @PutMapping("/{id}")
-    public Course updateStudent(@PathVariable(value = "id") int courseCode, @RequestBody Course newCourse) {
+    @PutMapping("/{courseCode}")
+    public Course updateStudent(@PathVariable(value = "courseCode") int courseCode, @RequestBody Course newCourse) {
         return courseService.updateCourse(courseCode, newCourse);
     }
 

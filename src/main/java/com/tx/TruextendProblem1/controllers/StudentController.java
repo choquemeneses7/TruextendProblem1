@@ -36,13 +36,18 @@ public class StudentController {
         return studentService.createStudent(student);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteStudent(@PathVariable(value = "id") int studentId) {
+    @PostMapping("/{studentId}")
+    public List<Course> addStudentsToCourse(@PathVariable(value = "studentId") int studentId, @RequestBody List<Course> courses) {
+        return studentService.addCoursesToStudent(studentId,courses);
+    }
+
+    @DeleteMapping("/{studentId}")
+    public void deleteStudent(@PathVariable(value = "studentId") int studentId) {
         studentService.deleteStudent(studentId);
     }
 
-    @PutMapping("/{id}")
-    public Student updateStudent(@PathVariable(value = "id") int studentId, @RequestBody Student student) {
+    @PutMapping("/{studentId}")
+    public Student updateStudent(@PathVariable(value = "studentId") int studentId, @RequestBody Student student) {
         return studentService.updateStudent(studentId, student);
     }
 }
