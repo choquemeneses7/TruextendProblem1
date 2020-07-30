@@ -101,7 +101,7 @@ public class StudentControllerTests {
 
     @Test
     public void getClassesOfStudentSuccessfully() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/api/students/courses/36051")
+        mvc.perform(MockMvcRequestBuilders.get("/api/students/36052/courses")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
@@ -109,9 +109,9 @@ public class StudentControllerTests {
 
     @Test
     public void getClassesOfInvalidStudent() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/api/students/courses/666")
+        mvc.perform(MockMvcRequestBuilders.get("/api/students/666/courses")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isEmpty());
     }
@@ -130,6 +130,7 @@ public class StudentControllerTests {
     public void getStudentByCodeInvalid() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/api/students/666")
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().is(500));
+                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
     }
 }

@@ -14,26 +14,19 @@ import java.util.Optional;
 @Service
 public class CourseService {
 
-    private List<Student> studentList= new ArrayList<Student>(Arrays.asList(
-            new Student(36051,"Veimar","Choque"),
-            new Student(36052,"Leo","Daza"),
-            new Student(36053,"Ruben","Dario"),
-            new Student(36054,"Mario","Grunt"),
-            new Student(36055,"Rodrigo","Rodriguez")));
-
-    private List<Course> coursesList = new ArrayList<Course>(Arrays.asList(
-            new Course(1, "Math", "Simple Math Class",new ArrayList<>(Arrays.asList(studentList.get(0),studentList.get(2)))),
-            new Course(2, "Music", "Rock Alternative Class",new ArrayList<>(Arrays.asList(studentList.get(1),studentList.get(3)))),
-            new Course(3, "Art", "Painting Mosaics Class",new ArrayList<>(Arrays.asList(studentList.get(0)))),
+    public static List<Course> coursesList = new ArrayList<Course>(Arrays.asList(
+            new Course(1, "Math", "Simple Math Class",new ArrayList<>(Arrays.asList(StudentService.studentList.get(0),StudentService.studentList.get(2)))),
+            new Course(2, "Music", "Rock Alternative Class",new ArrayList<>(Arrays.asList(StudentService.studentList.get(1),StudentService.studentList.get(3)))),
+            new Course(3, "Art", "Painting Mosaics Class",new ArrayList<>(Arrays.asList(StudentService.studentList.get(0)))),
             new Course(4, "Design", "Photoshop and illustrator class",new ArrayList<>(Arrays.asList())),
-            new Course(5, "Training", "A programation training program",new ArrayList<>(Arrays.asList(studentList.get(2),studentList.get(4))))));
+            new Course(5, "Training", "A programation training program",new ArrayList<>(Arrays.asList(StudentService.studentList.get(2),StudentService.studentList.get(4))))));
 
     public List<Course> getCourses() {
         return coursesList;
     }
 
     public List<Student> getStudentsOfCourse(int courseCode) {
-        Optional<Course> courseFound = coursesList.stream().filter(course -> course.getCode() == courseCode).findFirst();
+        Optional<Course> courseFound = getCourseByCode(courseCode);
         List<Student> response = new ArrayList<Student>();
         if (courseFound.isPresent()){
             courseFound.map(course -> response.addAll(course.getStudents()));
@@ -41,8 +34,8 @@ public class CourseService {
         return response;
     }
 
-    public Course getCourseByCode(int courseCode) {
-        Course courseFound = coursesList.stream().filter(course -> course.getCode() == courseCode).findFirst().get();
+    public Optional<Course> getCourseByCode(int courseCode) {
+        Optional<Course> courseFound = coursesList.stream().filter(course -> course.getCode() == courseCode).findFirst();
         return courseFound;
     }
 
@@ -61,7 +54,7 @@ public class CourseService {
     }
 
     public Course updateCourse(int courseCode, Course newCourse) throws ResourceNotFoundException {
-        Optional<Course> courseFind = coursesList.stream().filter(course -> courseCode == course.getCode()).findFirst();
+        Optional<Course> courseFind = getCourseByCode(courseCode);
         if (courseFind.isPresent()){
             courseFind.map(course -> coursesList.set(coursesList.indexOf(course), newCourse));
             return newCourse;

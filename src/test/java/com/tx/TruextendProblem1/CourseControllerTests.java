@@ -102,7 +102,7 @@ public class CourseControllerTests {
 
 	@Test
 	public void getStudentsOfClassSuccessfully() throws Exception {
-		mvc.perform(MockMvcRequestBuilders.get("/api/courses/students/1")
+		mvc.perform(MockMvcRequestBuilders.get("/api/courses/1/students")
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
@@ -110,7 +110,7 @@ public class CourseControllerTests {
 
 	@Test
 	public void getStudentsOfInvalidClass() throws Exception {
-		mvc.perform(MockMvcRequestBuilders.get("/api/courses/students/666")
+		mvc.perform(MockMvcRequestBuilders.get("/api/courses/666/students")
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
@@ -131,7 +131,8 @@ public class CourseControllerTests {
 	public void getStudentByCodeInvalid() throws Exception {
 		mvc.perform(MockMvcRequestBuilders.get("/api/courses/666")
 				.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(MockMvcResultMatchers.status().is(500));
+				.andExpect(MockMvcResultMatchers.status().is(200))
+				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
 	}
 
 }

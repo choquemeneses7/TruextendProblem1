@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/students")
@@ -21,11 +22,11 @@ public class StudentController {
     }
 
     @GetMapping("/{studentId}")
-    public Student getStudentById(@PathVariable(value = "studentId") int studentId){
+    public Optional<Student> getStudentById(@PathVariable(value = "studentId") int studentId){
         return studentService.getStudentById(studentId);
     }
 
-    @GetMapping("/courses/{studentId}")
+    @GetMapping("/{studentId}/courses")
     public List<Course> getCoursesOfStudent(@PathVariable(value = "studentId") int studentId){
         return studentService.getCoursesOfStudent(studentId);
     }

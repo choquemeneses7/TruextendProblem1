@@ -11,14 +11,14 @@ import java.util.*;
 @Service
 public class StudentService {
 
-    private List<Course> coursesList = new ArrayList<Course>(Arrays.asList(
+    public static List<Course> coursesList = new ArrayList<Course>(Arrays.asList(
             new Course(1, "Math", "Simple Math Class"),
             new Course(2, "Music", "Rock Alternative Class"),
             new Course(3, "Art", "Painting Mosaics Class"),
             new Course(4, "Design", "Photoshop and illustrator class"),
             new Course(5, "Training", "A programation training program")));
 
-    private List<Student> studentList= new ArrayList<Student>(Arrays.asList(
+    public static List<Student> studentList= new ArrayList<Student>(Arrays.asList(
             new Student(36051,"Veimar","Choque", new ArrayList<>(Arrays.asList(coursesList.get(0),coursesList.get(2)))),
             new Student(36052,"Leo","Daza", new ArrayList<>(Arrays.asList(coursesList.get(1)))),
             new Student(36053,"Ruben","Dario", new ArrayList<>(Arrays.asList(coursesList.get(0),coursesList.get(4)))),
@@ -29,13 +29,13 @@ public class StudentService {
         return studentList;
     }
 
-    public Student getStudentById(int studentId) {
-        Student studentFound = studentList.stream().filter(student -> student.getStudentId() == studentId).findFirst().get();
+    public Optional<Student> getStudentById(int studentId) {
+        Optional <Student> studentFound = studentList.stream().filter(student -> student.getStudentId() == studentId).findFirst();
         return studentFound;
     }
 
     public List<Course> getCoursesOfStudent(int studentId) {
-        Optional<Student> studentFound = studentList.stream().filter(student -> student.getStudentId() == studentId).findFirst();
+        Optional<Student> studentFound = getStudentById(studentId);
         List<Course> response = new ArrayList<Course>();
         if (studentFound.isPresent()){
             studentFound.map(student -> response.addAll(student.getCourses()));
@@ -57,9 +57,9 @@ public class StudentService {
     }
 
     public Student updateStudent(int studentId, Student student) throws ResourceNotFoundException {
-        Optional<Student> studentFind = studentList.stream().filter(itemStudent -> studentId == itemStudent.getStudentId()).findFirst();
-        if (studentFind.isPresent()){
-            studentFind.map(itemStudent -> studentList.set(studentList.indexOf(itemStudent), student));
+        Optional<Student> studentFound = getStudentById(studentId);
+        if (studentFound.isPresent()){
+            studentFound.map(itemStudent -> studentList.set(studentList.indexOf(itemStudent), student));
             return student;
         } else
             throw new ResourceNotFoundException("Student Id: "+studentId+ " not exists");
