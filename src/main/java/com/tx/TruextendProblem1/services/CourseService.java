@@ -1,7 +1,6 @@
 package com.tx.TruextendProblem1.services;
 
 import com.tx.TruextendProblem1.entities.Course;
-import com.tx.TruextendProblem1.entities.CourseStudentDetail;
 import com.tx.TruextendProblem1.entities.Student;
 import com.tx.TruextendProblem1.exceptions.DuplicatedKeyException;
 import com.tx.TruextendProblem1.exceptions.ResourceNotFoundException;
@@ -33,14 +32,6 @@ public class CourseService {
         return coursesList;
     }
 
-    public List<Course> getByCourseCode(List<CourseStudentDetail> details) {
-        List<Course> response = new ArrayList<Course>();
-        details.stream().forEach(courseStudentDetail -> response.add(coursesList.stream()
-                .filter(course -> course.getCode() == courseStudentDetail.getCode())
-                .findFirst().get()));
-        return response;
-    }
-
     public List<Student> getStudentsOfCourse(int courseCode) {
         Optional<Course> courseFound = coursesList.stream().filter(course -> course.getCode() == courseCode).findFirst();
         List<Student> response = new ArrayList<Student>();
@@ -48,6 +39,11 @@ public class CourseService {
             courseFound.map(course -> response.addAll(course.getStudents()));
         }
         return response;
+    }
+
+    public Course getCourseByCode(int courseCode) {
+        Course courseFound = coursesList.stream().filter(course -> course.getCode() == courseCode).findFirst().get();
+        return courseFound;
     }
 
     public Course createCourse(Course newCourse) throws DuplicatedKeyException {
