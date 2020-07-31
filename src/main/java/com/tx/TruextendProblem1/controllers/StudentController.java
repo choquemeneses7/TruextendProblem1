@@ -36,6 +36,11 @@ public class StudentController {
         return studentService.createStudent(student);
     }
 
+    @PostMapping("/{studentId}/{courseCode}")
+    public Boolean addStudentToCourse(@PathVariable(value = "studentId") int studentId, @PathVariable(value = "courseCode") int courseCode) {
+        return studentService.addStudentToCourse(studentId, courseCode);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteStudent(@PathVariable(value = "id") int studentId) {
         studentService.deleteStudent(studentId);
