@@ -4,6 +4,10 @@ import com.tx.TruextendProblem1.entities.Course;
 import com.tx.TruextendProblem1.entities.Student;
 import com.tx.TruextendProblem1.exceptions.DuplicatedKeyException;
 import com.tx.TruextendProblem1.exceptions.ResourceNotFoundException;
+<<<<<<< HEAD
+=======
+import com.tx.TruextendProblem1.mock.MockData;
+>>>>>>> [develop] Add mockdata to order in a better way data
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,15 +18,8 @@ import java.util.Optional;
 @Service
 public class CourseService {
 
-    public static List<Course> coursesList = new ArrayList<Course>(Arrays.asList(
-            new Course(1, "Math", "Simple Math Class",new ArrayList<>(Arrays.asList(StudentService.studentList.get(0),StudentService.studentList.get(2)))),
-            new Course(2, "Music", "Rock Alternative Class",new ArrayList<>(Arrays.asList(StudentService.studentList.get(1),StudentService.studentList.get(3)))),
-            new Course(3, "Art", "Painting Mosaics Class",new ArrayList<>(Arrays.asList(StudentService.studentList.get(0)))),
-            new Course(4, "Design", "Photoshop and illustrator class",new ArrayList<>(Arrays.asList())),
-            new Course(5, "Training", "A programation training program",new ArrayList<>(Arrays.asList(StudentService.studentList.get(2),StudentService.studentList.get(4))))));
-
     public List<Course> getCourses() {
-        return coursesList;
+        return MockData.getCoursesList();
     }
 
     public List<Student> getStudentsOfCourse(int courseCode) {
@@ -35,20 +32,20 @@ public class CourseService {
     }
 
     public Optional<Course> getCourseByCode(int courseCode) {
-        Optional<Course> courseFound = coursesList.stream().filter(course -> course.getCode() == courseCode).findFirst();
+        Optional<Course> courseFound = MockData.getCoursesList().stream().filter(course -> course.getCode() == courseCode).findFirst();
         return courseFound;
     }
 
     public Course createCourse(Course newCourse) throws DuplicatedKeyException {
-        if(coursesList.stream().anyMatch(course-> course.getCode()== newCourse.getCode())){
+        if(MockData.getCoursesList().stream().anyMatch(course-> course.getCode()== newCourse.getCode())){
             throw new DuplicatedKeyException("Class: "+ newCourse.getCode());
         }
-        coursesList.add(newCourse);
+        MockData.getCoursesList().add(newCourse);
         return newCourse;
     }
 
     public void deleteCourse(int courseCode) throws ResourceNotFoundException {
-        if(!coursesList.removeIf(course -> course.getCode() == courseCode)){
+        if(!MockData.getCoursesList().removeIf(course -> course.getCode() == courseCode)){
             throw new ResourceNotFoundException("Class: "+courseCode+ " not exists");
         }
     }
@@ -56,7 +53,7 @@ public class CourseService {
     public Course updateCourse(int courseCode, Course newCourse) throws ResourceNotFoundException {
         Optional<Course> courseFind = getCourseByCode(courseCode);
         if (courseFind.isPresent()){
-            courseFind.map(course -> coursesList.set(coursesList.indexOf(course), newCourse));
+            courseFind.map(course -> MockData.getCoursesList().set(MockData.getCoursesList().indexOf(course), newCourse));
             return newCourse;
         } else {
             throw new ResourceNotFoundException("Class: "+courseCode+ " not exists");
