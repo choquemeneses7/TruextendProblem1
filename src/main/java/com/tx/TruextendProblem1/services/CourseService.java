@@ -4,10 +4,7 @@ import com.tx.TruextendProblem1.entities.Course;
 import com.tx.TruextendProblem1.entities.Student;
 import com.tx.TruextendProblem1.exceptions.DuplicatedKeyException;
 import com.tx.TruextendProblem1.exceptions.ResourceNotFoundException;
-<<<<<<< HEAD
-=======
 import com.tx.TruextendProblem1.mock.MockData;
->>>>>>> [develop] Add mockdata to order in a better way data
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
