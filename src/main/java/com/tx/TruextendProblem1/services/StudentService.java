@@ -12,6 +12,8 @@ import java.util.*;
 @Service
 public class StudentService {
 
+    CourseService courseService = new CourseService();
+
     public List<Student> getStudents() {
         return MockData.getStudentList();
     }
@@ -35,6 +37,19 @@ public class StudentService {
             throw new DuplicatedKeyException("student Id: "+student.getStudentId());
         MockData.getStudentList().add(student);
         return student;
+    }
+
+    public Boolean addStudentToCourse(int studentId, int courseCode) throws DuplicatedKeyException  {
+        Optional<Student> studentFound = getStudentById(studentId);
+        Optional<Course> courseFound = courseService.getCourseByCode(courseCode);
+        if (studentFound.isPresent() && courseFound.isPresent()){
+            Course courseWithoutRecursion = new Course(courseFound.get().getCode(), courseFound.get().getTitle(), courseFound.get().getDescription());
+            courseService.getCourseByCode(courseCode).ifPresent(course -> course.getStudents().add(studentFound.get()));
+            getStudentById(studentId).ifPresent(student -> student.getCourses().add(courseWithoutRecursion));
+        } else {
+            throw new ResourceNotFoundException("Student Id: "+studentId+ "or Course Code:"+courseCode+ " not exist");
+        }
+        return true;
     }
 
     public void deleteStudent(int studentId) throws ResourceNotFoundException {
